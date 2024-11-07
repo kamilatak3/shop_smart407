@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ShopSmart</string>
+
+    <string-array name="sorting_options">
+        <item>Popular</item>
+        <item>Low Price</item>
+    </string-array>
+
+</resources>
+
+

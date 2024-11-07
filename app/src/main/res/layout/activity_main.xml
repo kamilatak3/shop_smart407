@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Search View with Voice Input Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:queryHint="Search products" />
+    </LinearLayout>
+
+    <!-- Sorting Options Spinner -->
+    <Spinner
+        android:id="@+id/sortingOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/sorting_options"
+        android:contentDescription="Sorting Options" />
+
+    <!-- Quick Filters -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/filterLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/filterDairy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dairy" />
+
+            <Button
+                android:id="@+id/filterBread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bread" />
+
+            <Button
+                android:id="@+id/filterVeggies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Veggies" />
+
+            <!-- Add more filter buttons as needed -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Product List RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
+
+    <!-- Map Button to Navigate to Nearby Shops -->
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Nearby Shops on Map"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@android:color/white" />
+</LinearLayout>
