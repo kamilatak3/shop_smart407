@@ -21,9 +21,6 @@ class SearchPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-//        view.findViewById<Button>(R.id.recommendButton).setOnClickListener{
-//            Toast.makeText(activity, "First Fragment", Toast.LENGTH_SHORT).show()
-//        }
         return view
     }
 
