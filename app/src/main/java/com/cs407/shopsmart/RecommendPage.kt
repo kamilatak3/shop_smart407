@@ -30,36 +30,36 @@ class RecommendPage : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_recommend, container, false)
-//        view.findViewById<Button>(R.id.recommendButton).setOnClickListener{
-//            Toast.makeText(activity, "First Fragment", Toast.LENGTH_SHORT).show()
-//        }
-        return view
+        return inflater.inflate(R.layout.fragment_recommend, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recommendRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Pass recommended items to the adapter
-        recyclerView.adapter = ItemAdapter(DataHolder.recommendedItems) { item : ItemObject ->
-            // Example: Add to saved items when clicked
+        // Set adapter for RecyclerView
+        recyclerView.adapter = ItemAdapter(DataHolder.recommendedItems) { item: ItemObject ->
             DataHolder.savedItems.add(item)
             Toast.makeText(requireContext(), "${item.name} saved!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Initialize and set onClickListener for Button
+        val myButton: Button = view.findViewById(R.id.sortByPriceButton)
+        myButton.setOnClickListener {
+            Toast.makeText(requireContext(), "changed to by price", Toast.LENGTH_SHORT).show()
+        }
+
+        // Initialize and set onClickListener for Second Button
+        val secondButton: Button = view.findViewById(R.id.sortByDistanceButton)
+        secondButton.setOnClickListener {
+            Toast.makeText(requireContext(), "changed to by distance", Toast.LENGTH_SHORT).show()
         }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FirstFragment.
-         */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             RecommendPage().apply {
