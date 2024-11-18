@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemAdapter(
-    private val items: List<ItemObject>,
+    private var items: MutableList<ItemObject>, // Dataset for the adapter
     private val onItemSave: (ItemObject) -> Unit // Callback for save button
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
@@ -28,14 +28,17 @@ class ItemAdapter(
         val item = items[position]
         holder.itemName.text = item.name
         holder.itemPrice.text = "$${item.price}"
-
-        // Handle Save Button Click
-        holder.saveButton.setOnClickListener {
-            onItemSave(item) // Trigger the callback when the save button is clicked
-        }
+        holder.saveButton.setOnClickListener { onItemSave(item) }
     }
 
     override fun getItemCount(): Int = items.size
+
+    // Method to update items dynamically
+    fun updateItems(newItems: List<ItemObject>) {
+        items.clear() // Clear old items
+        items.addAll(newItems) // Add new items
+        notifyDataSetChanged() // Refresh RecyclerView
+    }
 }
 
 

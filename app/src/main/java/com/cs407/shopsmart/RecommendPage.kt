@@ -17,6 +17,7 @@ private const val ARG_PARAM2 = "param2"
 class RecommendPage : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var adapter: ItemAdapter // Declare adapter as a class-level property
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +41,44 @@ class RecommendPage : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recommendRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Set adapter for RecyclerView
-        recyclerView.adapter = ItemAdapter(DataHolder.recommendedItems) { item: ItemObject ->
+        // Initialize the adapter with a MutableList
+        adapter = ItemAdapter(DataHolder.recommendedItems.toMutableList()) { item: ItemObject ->
             DataHolder.savedItems.add(item)
             Toast.makeText(requireContext(), "${item.name} saved!", Toast.LENGTH_SHORT).show()
         }
+        recyclerView.adapter = adapter
 
-        // Initialize and set onClickListener for Button
-        val myButton: Button = view.findViewById(R.id.sortByPriceButton)
-        myButton.setOnClickListener {
-            Toast.makeText(requireContext(), "changed to by price", Toast.LENGTH_SHORT).show()
+        // Initialize and set onClickListener for Sort by Price Button
+        val sortByPriceButton: Button = view.findViewById(R.id.sortByPriceButton)
+        sortByPriceButton.setOnClickListener {
+            sortByPrice()
         }
 
-        // Initialize and set onClickListener for Second Button
-        val secondButton: Button = view.findViewById(R.id.sortByDistanceButton)
-        secondButton.setOnClickListener {
-            Toast.makeText(requireContext(), "changed to by distance", Toast.LENGTH_SHORT).show()
+        // Initialize and set onClickListener for Sort by Distance Button
+        val sortByDistanceButton: Button = view.findViewById(R.id.sortByDistanceButton)
+        sortByDistanceButton.setOnClickListener {
+            sortByDistance()
         }
+    }
+
+    /**
+     * Sort recommended items by price and update RecyclerView.
+     */
+    private fun sortByPrice() {
+        val sortedItems = DataHolder.recommendedItems.sortedBy { it.price }
+        adapter.updateItems(sortedItems.toMutableList()) // Convert to MutableList
+        Toast.makeText(requireContext(), "Items sorted by price", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Sort recommended items by shop distance and update RecyclerView.
+     */
+    private fun sortByDistance() {
+        val sortedItems = DataHolder.recommendedItems.sortedBy { item ->
+            DataHolder.shops.find { shop -> shop.name == item.shopLocation }?.distance ?: Double.MAX_VALUE
+        }
+        adapter.updateItems(sortedItems.toMutableList()) // Convert to MutableList
+        Toast.makeText(requireContext(), "Items sorted by distance", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
