@@ -1,5 +1,6 @@
 package com.cs407.shopsmart
 
+import ItemObject
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -32,6 +35,20 @@ class RecommendPage : Fragment() {
 //            Toast.makeText(activity, "First Fragment", Toast.LENGTH_SHORT).show()
 //        }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView: RecyclerView = view.findViewById(R.id.recommendRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Pass recommended items to the adapter
+        recyclerView.adapter = ItemAdapter(DataHolder.recommendedItems) { item : ItemObject ->
+            // Example: Add to saved items when clicked
+            DataHolder.savedItems.add(item)
+            Toast.makeText(requireContext(), "${item.name} saved!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {

@@ -1,55 +1,11 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/input_item"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/savedRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Add item to shopping list"
-        android:inputType="text" />
-
-    <ListView
-        android:id="@+id/lv_shopping_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <Button
-            android:id="@+id/mapButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Explore"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/recommendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:text="Recommend"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 </LinearLayout>
