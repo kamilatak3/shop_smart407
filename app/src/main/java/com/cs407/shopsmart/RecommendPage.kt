@@ -1,12 +1,16 @@
 package com.cs407.shopsmart
 
 import ItemObject
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +49,7 @@ class RecommendPage : Fragment() {
         adapter = ItemAdapter(DataHolder.recommendedItems.toMutableList()) { item: ItemObject ->
             DataHolder.savedItems.add(item)
             Toast.makeText(requireContext(), "${item.name} saved!", Toast.LENGTH_SHORT).show()
+            sendSaveNotification(item)
         }
         recyclerView.adapter = adapter
 
@@ -58,6 +63,33 @@ class RecommendPage : Fragment() {
         val sortByDistanceButton: Button = view.findViewById(R.id.sortByDistanceButton)
         sortByDistanceButton.setOnClickListener {
             sortByDistance()
+        }
+    }
+
+    /**
+     * Sends a notification when an item is saved.
+     */
+    private fun sendSaveNotification(item: ItemObject) {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            requireContext(),
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val builder = NotificationCompat.Builder(requireContext(), MainActivity.CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_bookmark_add_24)
+            .setContentTitle("Item Saved")
+            .setContentText("${item.name} has been added to your saved items.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            notify(MainActivity.NOTIFICATION_ID, builder.build())
         }
     }
 

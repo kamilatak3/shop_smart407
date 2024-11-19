@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,9 +31,6 @@ class SavedPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_shopping_list, container, false)
-//        view.findViewById<Button>(R.id.recommendButton).setOnClickListener{
-//            Toast.makeText(activity, "First Fragment", Toast.LENGTH_SHORT).show()
-//        }
         return view
     }
 
@@ -43,11 +41,23 @@ class SavedPage : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Pass saved items to the adapter
-        recyclerView.adapter = ItemAdapter(DataHolder.savedItems) { item : ItemObject ->
+        recyclerView.adapter = ItemAdapter(DataHolder.savedItems) { item: ItemObject ->
             // Remove item when clicked
             DataHolder.savedItems.remove(item)
             recyclerView.adapter?.notifyDataSetChanged()
             Toast.makeText(requireContext(), "${item.name} removed!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Initialize Clear All Button
+        val clearAllButton: Button = view.findViewById(R.id.clearAllButton)
+        clearAllButton.setOnClickListener {
+            if (DataHolder.savedItems.isNotEmpty()) {
+                DataHolder.savedItems.clear()
+                recyclerView.adapter?.notifyDataSetChanged()
+                Toast.makeText(requireContext(), "All items cleared!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "No items to clear.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -62,7 +72,7 @@ class SavedPage : Fragment() {
          */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RecommendPage().apply {
+            SavedPage().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

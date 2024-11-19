@@ -1,22 +1,30 @@
 package com.cs407.shopsmart
 
-import ItemObject
-import ShopObject
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 
 class MainActivity : AppCompatActivity() {
 
-
-
+    companion object {
+        const val CHANNEL_ID = "shop_smart_channel"
+        const val NOTIFICATION_ID = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        createNotificationChannel()
 
         val fragmentManager = supportFragmentManager
         findViewById<Button>(R.id.nav_explore).setOnClickListener {
@@ -47,8 +55,23 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack("Search Button")
                 .commit()
         }
-
     }
 
-
+    /**
+     * Creates a Notification Channel for ShopSmart notifications.
+     */
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "ShopSmart Channel"
+            val descriptionText = "Channel for ShopSmart notifications"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
 }
