@@ -1,5 +1,6 @@
 package com.cs407.shopsmart
 
+import ShopDetails
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,12 +38,13 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
         // Example: Add markers for each shop
         DataHolder.shops.forEach { shop ->
             val shopLocation = LatLng(shop.coordinates.latitude, shop.coordinates.longitude)
-            googleMap.addMarker(
+            val marker = googleMap.addMarker(
                 MarkerOptions()
                     .position(shopLocation)
                     .title(shop.name)
                     .snippet(shop.address)
             )
+            marker?.tag = shop.id  // Set the shop ID as the marker's tag
         }
 
         // Move the camera to the first shop or a default location
@@ -55,5 +57,23 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
             val defaultLocation = LatLng(43.0731, -89.4012)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
         }
+
+        // Set marker click listener
+        googleMap.setOnMarkerClickListener { marker ->
+            val shopId = marker.tag as? String  // Retrieve the shop ID from the marker's tag
+            openShopDetails(shopId)
+            true
+        }
     }
-} 
+
+    private fun openShopDetails(shopId: String?) {
+        val shopDetailsFragment = ShopDetails()
+        val args = Bundle()
+        args.putString("SHOP_ID", shopId)  // Pass the shop ID to the fragment
+        shopDetailsFragment.arguments = args
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, shopDetailsFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+}

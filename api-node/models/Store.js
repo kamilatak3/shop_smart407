@@ -12,7 +12,8 @@ class Store {
      * @param {number} coordinates.latitude - The latitude of the store.
      * @param {number} coordinates.longitude - The longitude of the store.
      */
-    constructor(name, address, coordinates) {
+    constructor(id, name, address, coordinates) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.coordinates = coordinates;
