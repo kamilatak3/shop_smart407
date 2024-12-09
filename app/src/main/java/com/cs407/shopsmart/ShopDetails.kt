@@ -32,5 +32,6 @@ class ShopDetails : Fragment() {
         shopIdTextView.text = "Shop ID: $shopId"
 
         // TODO: Load and display additional shop details using the shopId
+
     }
 }

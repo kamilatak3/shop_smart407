@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
 
-    <!-- TextView to display the shop's name -->
+<!-- TextView to display the shop's name -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/shopIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/shopNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop Name"
+            android:textSize="16sp" />
+
+
     <TextView
-        android:id="@+id/shopNameTextView"
+        android:id="@+id/shopAddressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shop Name"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Shop Address"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/shopDistanceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shop Distance"
+        android:layout_marginTop="8dp" />
 
     <!-- Add other views such as a RecyclerView to display the shop's items -->
     <androidx.recyclerview.widget.RecyclerView
@@ -20,4 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/shopDescriptionTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Shop Description"-->
+<!--        android:layout_marginTop="8dp"/>-->
 </LinearLayout>

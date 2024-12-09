@@ -9,9 +9,9 @@ import Coordinates
 
 object DataHolder {
     val recommendedItems: List<ItemObject> = listOf(
-        ItemObject(id = 1, name = "Milk", shopLocation = "Shop A", price = 2.5),
-        ItemObject(id = 2, name = "Bread", shopLocation = "Shop B", price = 1.0),
-        ItemObject(id = 3, name = "Eggs", shopLocation = "Shop A", price = 3.0)
+        ItemObject(id = 1, name = "Milk", price = 2.5),
+        ItemObject(id = 2, name = "Bread", price = 1.0),
+        ItemObject(id = 3, name = "Eggs", price = 3.0)
     )
 
     val shops: List<ShopObject> = listOf(

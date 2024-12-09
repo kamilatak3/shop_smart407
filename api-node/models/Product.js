@@ -1,9 +1,11 @@
 class Product {
+static nextId = 0;
     /**
      * Creates a new Product instance.
      * @param {string} type - The type of the product ('milk', 'eggs', or 'bread').
      */
     constructor(type) {
+        this.id = Product.nextId++;
         this.type = type.toLowerCase();
         this.price = this.generateRandomPrice();
     }
@@ -37,4 +39,4 @@ class Product {
     }
 }
 
-module.exports = Product; 
+module.exports = Product;
