@@ -26,16 +26,36 @@ class Store {
      * @returns {object} - An object containing products with their price and stock.
      */
     initializeProducts() {
-        const productTypes = ['milk', 'eggs', 'bread'];
+        const productTypes = [
+            "Apples",
+            "Bananas",
+            "Oranges",
+            "Milk",
+            "Bread",
+            "Eggs",
+            "Cheese",
+            "Butter",
+            "Chicken",
+            "Beef",
+            "Pasta",
+            "Rice",
+            "Cereal",
+            "Yogurt",
+            "Juice"
+        ];
         const products = {};
 
         productTypes.forEach(type => {
-            const product = new Product(type);
-            const stock = Math.floor(Math.random() * 101); // Random stock between 0-100
-            products[type] = {
-                price: product.price,
-                stock: stock
-            };
+            try {
+                const product = new Product(type);
+                const stock = Math.floor(Math.random() * 101); // Random stock between 0-100
+                products[type] = {
+                    price: product.price,
+                    stock: stock
+                };
+            } catch (error) {
+                console.error(`Error initializing product "${type}": ${error.message}`);
+            }
         });
 
         return products;

@@ -2,7 +2,7 @@ class Product {
 static nextId = 0;
     /**
      * Creates a new Product instance.
-     * @param {string} type - The type of the product ('milk', 'eggs', or 'bread').
+     * @param {string} type - The type of the product (e.g., 'milk', 'eggs', 'bread', etc.).
      */
     constructor(type) {
         this.id = Product.nextId++;
@@ -18,18 +18,41 @@ static nextId = 0;
         let min, max;
 
         switch (this.type) {
+            // Fruits
+            case 'apples':
+            case 'bananas':
+            case 'oranges':
+                min = 0.50;
+                max = 3.00;
+                break;
+
+            // Dairy
             case 'milk':
-                min = 2.0;
-                max = 3.5;
-                break;
             case 'eggs':
-                min = 3.0;
-                max = 5.0;
+            case 'cheese':
+            case 'butter':
+            case 'yogurt':
+                min = 1.00;
+                max = 6.00;
                 break;
+
+            // Meat
+            case 'chicken':
+            case 'beef':
+                min = 3.00;
+                max = 15.00;
+                break;
+
+            // Pantry
             case 'bread':
-                min = 1.0;
-                max = 2.0;
+            case 'pasta':
+            case 'rice':
+            case 'cereal':
+            case 'juice':
+                min = 1.00;
+                max = 10.00;
                 break;
+
             default:
                 throw new Error(`Invalid product type: ${this.type}`);
         }

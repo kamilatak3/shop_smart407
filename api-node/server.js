@@ -21,7 +21,7 @@ function getRandomPrice(min, max) {
     return parseFloat((Math.random() * (max - min) + min).toFixed(2));
 }
 
-// Sample products list
+// Sample products list (if needed elsewhere)
 const sampleProducts = [
     "Apples",
     "Bananas",
@@ -42,17 +42,29 @@ const sampleProducts = [
 
 // Basic route
 app.get('/', (req, res) => {
-  res.send('Hello from ShopSmart API!');
+    res.send('Hello from ShopSmart API!');
 });
 
-// GET all products with random prices
+// GET all products with random prices (if needed)
 app.get('/api/products', (req, res) => {
-  const products = [
-    new Product('milk'),
-    new Product('eggs'),
-    new Product('bread'),
-  ];
-  res.json(products);
+    const products = [
+        new Product('milk'),
+        new Product('eggs'),
+        new Product('bread'),
+        new Product('apples'),
+        new Product('bananas'),
+        new Product('oranges'),
+        new Product('cheese'),
+        new Product('butter'),
+        new Product('chicken'),
+        new Product('beef'),
+        new Product('pasta'),
+        new Product('rice'),
+        new Product('cereal'),
+        new Product('yogurt'),
+        new Product('juice')
+    ];
+    res.json(products);
 });
 
 /**
@@ -107,9 +119,8 @@ app.get('/api/shop/:shopId/products', (req, res) => {
         return res.status(404).json({ error: 'Store not found.' });
     }
 
-    // Assign unique integer IDs to products
-    const productTypes = Object.keys(store.products);
-    const products = productTypes.map((type, index) => ({
+    // Extract products from the store
+    const products = Object.keys(store.products).map((type, index) => ({
         id: index + 1, // Assigning incremental integer IDs starting from 1
         name: type.charAt(0).toUpperCase() + type.slice(1),
         quantity: store.products[type].stock,
