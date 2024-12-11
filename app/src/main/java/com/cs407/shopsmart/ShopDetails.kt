@@ -102,7 +102,8 @@ class ShopDetails : Fragment() {
                                     id = jsonObject.getInt("id"),
                                     name = jsonObject.getString("name"),
                                     quantity = jsonObject.getInt("quantity"),
-                                    price = jsonObject.getDouble("price")
+                                    price = jsonObject.getDouble("price"),
+                                    imageName = getImageName(jsonObject.getString("name"))
                                 )
                                 products.add(product)
                             }
@@ -120,6 +121,27 @@ class ShopDetails : Fragment() {
                 }
             }
         })
+    }
+
+    private fun getImageName(productName: String): String {
+        return when (productName.lowercase()) {
+            "apples" -> "apples"
+            "bananas" -> "bananas"
+            "oranges" -> "oranges"
+            "milk" -> "milk"
+            "bread" -> "bread"
+            "eggs" -> "eggs"
+            "cheese" -> "cheese"
+            "butter" -> "butter"
+            "chicken" -> "chicken"
+            "beef" -> "beef"
+            "pasta" -> "pasta"
+            "rice" -> "rice"
+            "cereal" -> "cereal"
+            "yogurt" -> "yogurt"
+            "juice" -> "juice"
+            else -> "ic_default_image" // Default image
+        }
     }
 
     companion object {

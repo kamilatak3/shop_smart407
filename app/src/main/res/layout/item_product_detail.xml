@@ -3,34 +3,50 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="8dp">
 
-    <!-- Product Name -->
-    <TextView
-        android:id="@+id/productNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Name"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/product_image"
+        android:scaleType="centerCrop" />
 
-    <!-- Product Quantity -->
-    <TextView
-        android:id="@+id/productQuantityTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Quantity: 0"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-    <!-- Product Price -->
-    <TextView
-        android:id="@+id/productPriceTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price: \$0.00"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
-        
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/productNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Product Quantity -->
+        <TextView
+            android:id="@+id/productQuantityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity: 0"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Product Price -->
+        <TextView
+            android:id="@+id/productPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: $0.00"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
 </LinearLayout> 

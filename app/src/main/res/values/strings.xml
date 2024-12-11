@@ -6,6 +6,8 @@
         <item>Low Price</item>
     </string-array>
 
+    <string name="product_image">Product Image</string>
+
 </resources>
 
 

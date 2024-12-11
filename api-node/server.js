@@ -146,7 +146,8 @@ app.get('/api/shop/:shopId/products', (req, res) => {
             id: index + 1, // Assign unique integer IDs starting from 1
             name: type,
             quantity: stock,
-            price: product.price
+            price: product.price,
+            imageName: type.toLowerCase() // Assuming image names match product types
         };
     });
 
