@@ -36,7 +36,7 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-        // Example: Add markers for each shop
+        // Add markers for each shop
         DataHolder.shops.forEach { shop ->
             val shopLocation = LatLng(shop.coordinates.latitude, shop.coordinates.longitude)
             val marker = googleMap.addMarker(

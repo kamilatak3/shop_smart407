@@ -12,23 +12,18 @@ class CustomInfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
     private val window: View = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null)
 
     override fun getInfoWindow(marker: Marker): View? {
-        render(marker, window)
-        return window
-    }
-
-    override fun getInfoContents(marker: Marker): View? {
-        // Use default info window contents
+        // Return null to use default frame, only customize the contents
         return null
     }
 
-    private fun render(marker: Marker, view: View) {
-        val title = marker.title
-        val snippet = marker.snippet
+    override fun getInfoContents(marker: Marker): View {
+        // Bind the title and snippet to the respective TextViews
+        val titleTextView: TextView = window.findViewById(R.id.titleTextView)
+        val addressTextView: TextView = window.findViewById(R.id.addressTextView)
 
-        val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val addressTextView: TextView = view.findViewById(R.id.addressTextView)
+        titleTextView.text = marker.title
+        addressTextView.text = marker.snippet
 
-        titleTextView.text = title
-        addressTextView.text = snippet
+        return window
     }
 } 
