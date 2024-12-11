@@ -6,6 +6,7 @@ const Product = require('./Product');
 class Store {
     /**
      * Creates a new Store instance.
+     * @param {number} id - The unique identifier for the store.
      * @param {string} name - The name of the store.
      * @param {string} address - The address of the store.
      * @param {object} coordinates - The coordinates of the store.
