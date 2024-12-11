@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.cs407.shopsmart.DataHolder
 import com.cs407.shopsmart.R
 
 class ShopDetails : Fragment() {
@@ -31,7 +32,17 @@ class ShopDetails : Fragment() {
         val shopIdTextView: TextView = view.findViewById(R.id.shopIdTextView)
         shopIdTextView.text = "Shop ID: $shopId"
 
-        // TODO: Load and display additional shop details using the shopId
+        // Display additional shop details
+        val shopNameTextView: TextView = view.findViewById(R.id.shopNameTextView)
+        val shopAddressTextView: TextView = view.findViewById(R.id.shopAddressTextView)
+        val shopDistanceTextView: TextView = view.findViewById(R.id.shopDistanceTextView)
 
+        val shop = DataHolder.shops.find { it.id.toString() == shopId }
+        shop?.let {
+            shopNameTextView.text = it.name
+            shopAddressTextView.text = it.address
+            shopDistanceTextView.text = "${it.distance} miles"
+            // You can also set up the RecyclerView to display items if available
+        }
     }
 }

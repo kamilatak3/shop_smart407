@@ -18,10 +18,10 @@ object DataHolder {
         ShopObject(
             id = 1,
             name = "Pick 'n Save",
-            distance = 2.5, // You may want to calculate or assign appropriate distances
+            distance = 2.5,
             address = "2502 Shopko Dr, Madison, WI 53704",
             coordinates = Coordinates(43.112868, -89.349744),
-            items = emptyList() // Assuming empty for now
+            items = emptyList()
         ),
         ShopObject(
             id = 2,

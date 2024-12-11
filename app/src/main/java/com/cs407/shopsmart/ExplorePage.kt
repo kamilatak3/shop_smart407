@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class ExplorePage : Fragment(), OnMapReadyCallback {
@@ -58,12 +60,11 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
         }
 
-        // Set marker click listener
-        googleMap.setOnMarkerClickListener { marker ->
-            val shopId = marker.tag as? String  // Retrieve the shop ID from the marker's tag
-            openShopDetails(shopId)
-            true
-        }
+        // Set custom info window adapter
+        googleMap.setInfoWindowAdapter(CustomInfoWindowAdapter())
+
+        // Set listeners
+        setMapListeners()
     }
 
     private fun openShopDetails(shopId: String?) {
@@ -75,5 +76,38 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
             .replace(R.id.fragment_container, shopDetailsFragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun setMapListeners() {
+        googleMap.setOnMarkerClickListener { marker ->
+            marker.showInfoWindow()
+            true
+        }
+
+        // Handle info window clicks to open ShopDetails
+        googleMap.setOnInfoWindowClickListener { marker ->
+            val shopId = marker.tag as? Int
+            openShopDetails(shopId?.toString())
+        }
+
+        // Optionally, handle map touch events to hide info windows
+        googleMap.setOnMapClickListener {
+            googleMap.clear()
+            // Re-add markers if necessary
+        }
+    }
+
+    inner class CustomInfoWindowAdapter : GoogleMap.InfoWindowAdapter {
+        private val window: View = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null)
+
+        override fun getInfoWindow(marker: Marker): View? {
+            return null // Use default frame
+        }
+
+        override fun getInfoContents(marker: Marker): View {
+            val storeNameTextView: TextView = window.findViewById(R.id.storeNameTextView)
+            storeNameTextView.text = marker.title
+            return window
+        }
     }
 }
