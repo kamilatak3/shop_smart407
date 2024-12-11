@@ -24,11 +24,11 @@
 
         <!-- Second Button -->
     <Button
-        android:id="@+id/sortByDistanceButton"
+        android:id="@+id/sortByPopularityButton"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#03DAC5"
-        android:text="Sort by distance" />
+        android:text="Sort by Popularity" />
 
 
 </LinearLayout>

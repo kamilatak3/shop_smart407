@@ -1,5 +1,7 @@
 class Product {
+    static nextId = 0;
     constructor(type) {
+        this.id = Product.nextId++;
         this.type = type.toLowerCase();
         this.price = this.generateRandomPrice();
     }

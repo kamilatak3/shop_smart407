@@ -87,6 +87,7 @@ class ShopDetails : Fragment() {
                     if (!response.isSuccessful) {
                         requireActivity().runOnUiThread {
                             Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_LONG).show()
+
                         }
                         return
                     }

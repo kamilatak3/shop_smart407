@@ -4,14 +4,34 @@ package com.cs407.shopsmart
 import ItemObject
 import ShopObject
 import Coordinates
+import android.content.ClipData.Item
 
 // Coordinates class definition
 
 object DataHolder {
+    private val apple = ItemObject(1, "Apples", 2.0) // Adjust price as needed
+    private val banana = ItemObject(2, "Bananas", 1.5) // Adjust price as needed
+    private val orange = ItemObject(3, "Oranges", 2.5) // Adjust price as needed
+
+    // Dairy
+    private val milk = ItemObject(4, "Milk", 2.5)
+    private val eggs = ItemObject(5, "Eggs", 3.0) // Adjust price as needed
+    private val cheese = ItemObject(6, "Cheese", 4.5) // Adjust price as needed
+    private val butter = ItemObject(7, "Butter", 5.0) // Adjust price as needed
+    private val yogurt = ItemObject(8, "Yogurt", 3.5) // Adjust price as needed
+
+    // Meat
+    private val chicken = ItemObject(9, "Chicken", 7.0) // Adjust price as needed
+    private val beef = ItemObject(10, "Beef", 12.0) // Adjust price as needed
+
+    // Pantry
+    private val bread = ItemObject(11, "Bread", 2.5) // Adjust price as needed
+    private val pasta = ItemObject(12, "Pasta", 3.0) // Adjust price as needed
+    private val rice = ItemObject(13, "Rice", 4.0) // Adjust price as needed
+    private val cereal = ItemObject(14, "Cereal", 5.5) // Adjust price as needed
+    private val juice = ItemObject(15, "Juice", 3.5) // Adjust price as needed
     val recommendedItems: List<ItemObject> = listOf(
-        ItemObject(id = 1, name = "Milk", price = 2.5),
-        ItemObject(id = 2, name = "Bread", price = 1.0),
-        ItemObject(id = 3, name = "Eggs", price = 3.0)
+        apple, banana, orange, milk, eggs, cheese, butter, yogurt, chicken, beef, bread, pasta, rice, cereal, juice
     )
 
     val shops: List<ShopObject> = listOf(
@@ -82,4 +102,7 @@ object DataHolder {
     )
 
     val savedItems: MutableList<ItemObject> = mutableListOf()
+//    val searchableItems: List<ItemObject> = listOf(
+
+//    )
 }

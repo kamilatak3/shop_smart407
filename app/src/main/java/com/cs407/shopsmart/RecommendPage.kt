@@ -60,10 +60,10 @@ class RecommendPage : Fragment() {
         }
 
         // Initialize and set onClickListener for Sort by Distance Button
-//        val sortByDistanceButton: Button = view.findViewById(R.id.sortByDistanceButton)
-//        sortByDistanceButton.setOnClickListener {
-//            sortByDistance()
-//        }
+        val sortByPopularityButton: Button = view.findViewById(R.id.sortByPopularityButton)
+        sortByPopularityButton.setOnClickListener {
+            sortByDefault()
+        }
     }
 
     /**
@@ -105,13 +105,13 @@ class RecommendPage : Fragment() {
     /**
      * Sort recommended items by shop distance and update RecyclerView.
      */
-//    private fun sortByDistance() {
-//        val sortedItems = DataHolder.recommendedItems.sortedBy { item ->
+    private fun sortByDefault() {
+        val sortedItems = DataHolder.recommendedItems.sortedBy { it.id
 //            DataHolder.shops.find { shop -> shop.name == item.shopLocation }?.distance ?: Double.MAX_VALUE
-//        }
-//        adapter.updateItems(sortedItems.toMutableList()) // Convert to MutableList
-//        Toast.makeText(requireContext(), "Items sorted by distance", Toast.LENGTH_SHORT).show()
-//    }
+        }
+        adapter.updateItems(sortedItems.toMutableList()) // Convert to MutableList
+        Toast.makeText(requireContext(), "Items sorted by popularity", Toast.LENGTH_SHORT).show()
+    }
 
     companion object {
         @JvmStatic

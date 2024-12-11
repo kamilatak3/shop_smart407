@@ -6,4 +6,4 @@ data class ProductDetail(
     val quantity: Int,
     val price: Double,
     val imageName: String
-) 
+)
