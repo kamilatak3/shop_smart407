@@ -1,19 +1,9 @@
 class Product {
-static nextId = 0;
-    /**
-     * Creates a new Product instance.
-     * @param {string} type - The type of the product (e.g., 'milk', 'eggs', 'bread', etc.).
-     */
     constructor(type) {
-        this.id = Product.nextId++;
         this.type = type.toLowerCase();
         this.price = this.generateRandomPrice();
     }
 
-    /**
-     * Generates a random price based on the product type.
-     * @returns {number} - The randomly generated price.
-     */
     generateRandomPrice() {
         let min, max;
 

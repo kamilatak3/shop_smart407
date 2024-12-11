@@ -18,48 +18,12 @@ class Store {
         this.name = name;
         this.address = address;
         this.coordinates = coordinates;
-        this.products = this.initializeProducts();
+        // Remove or comment out the following line if products are dynamically generated
+        // this.products = this.initializeProducts();
     }
 
-    /**
-     * Initializes the store's products with random stock and price.
-     * @returns {object} - An object containing products with their price and stock.
-     */
-    initializeProducts() {
-        const productTypes = [
-            "Apples",
-            "Bananas",
-            "Oranges",
-            "Milk",
-            "Bread",
-            "Eggs",
-            "Cheese",
-            "Butter",
-            "Chicken",
-            "Beef",
-            "Pasta",
-            "Rice",
-            "Cereal",
-            "Yogurt",
-            "Juice"
-        ];
-        const products = {};
-
-        productTypes.forEach(type => {
-            try {
-                const product = new Product(type);
-                const stock = Math.floor(Math.random() * 101); // Random stock between 0-100
-                products[type] = {
-                    price: product.price,
-                    stock: stock
-                };
-            } catch (error) {
-                console.error(`Error initializing product "${type}": ${error.message}`);
-            }
-        });
-
-        return products;
-    }
+    // Optionally, keep a method to initialize products if needed elsewhere
+    // initializeProducts() { ... }
 }
 
 module.exports = Store; 

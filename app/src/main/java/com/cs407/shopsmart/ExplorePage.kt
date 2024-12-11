@@ -60,17 +60,14 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
         }
 
         // Set custom info window adapter
-        googleMap.setInfoWindowAdapter(CustomInfoWindowAdapter())
+        googleMap.setInfoWindowAdapter(CustomInfoWindowAdapter(requireContext()))
 
         // Set listeners
         setMapListeners()
     }
 
     private fun openShopDetails(shopId: String?) {
-        val shopDetailsFragment = ShopDetails()
-        val args = Bundle()
-        args.putString("SHOP_ID", shopId)  // Pass the shop ID to the fragment
-        shopDetailsFragment.arguments = args
+        val shopDetailsFragment = ShopDetails.newInstance(shopId ?: "")
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, shopDetailsFragment)
             .addToBackStack(null)
@@ -85,8 +82,12 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
 
         // Handle info window clicks to open ShopDetails
         googleMap.setOnInfoWindowClickListener { marker ->
-            val shopId = marker.tag as? Int
-            openShopDetails(shopId?.toString())
+            val shop = DataHolder.shops.find { 
+                it.name == marker.title && it.address == marker.snippet 
+            }
+            shop?.let {
+                openShopDetails(it.id.toString())
+            }
         }
 
         // Optionally, handle map touch events to hide info windows
@@ -104,7 +105,7 @@ class ExplorePage : Fragment(), OnMapReadyCallback {
         }
 
         override fun getInfoContents(marker: Marker): View {
-            val storeNameTextView: TextView = window.findViewById(R.id.storeNameTextView)
+            val storeNameTextView: TextView = window.findViewById(R.id.addressTextView)
             storeNameTextView.text = marker.title
             return window
         }

@@ -119,13 +119,36 @@ app.get('/api/shop/:shopId/products', (req, res) => {
         return res.status(404).json({ error: 'Store not found.' });
     }
 
-    // Extract products from the store
-    const products = Object.keys(store.products).map((type, index) => ({
-        id: index + 1, // Assigning incremental integer IDs starting from 1
-        name: type.charAt(0).toUpperCase() + type.slice(1),
-        quantity: store.products[type].stock,
-        price: store.products[type].price
-    }));
+    // Define the list of product types
+    const productTypes = [
+        "Apples",
+        "Bananas",
+        "Oranges",
+        "Milk",
+        "Bread",
+        "Eggs",
+        "Cheese",
+        "Butter",
+        "Chicken",
+        "Beef",
+        "Pasta",
+        "Rice",
+        "Cereal",
+        "Yogurt",
+        "Juice"
+    ];
+
+    // Generate random quantities and prices for each product type
+    const products = productTypes.map((type, index) => {
+        const product = new Product(type); // Generates a random price based on type
+        const stock = getRandomInt(0, 100); // Random stock between 0 and 100
+        return {
+            id: index + 1, // Assign unique integer IDs starting from 1
+            name: type,
+            quantity: stock,
+            price: product.price
+        };
+    });
 
     res.json(products);
 });
